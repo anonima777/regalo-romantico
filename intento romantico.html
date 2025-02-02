@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de San Valentín</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: url('https://www.transparenttextures.com/patterns/lovey-dovey.png'), linear-gradient(135deg, #ffb3c1, #f8bbd0);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+            text-align: center;
+            color: #333;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-family: 'Kaushan Script', cursive;
+            font-size: 48px;
+            color: #d32f2f;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .envelope {
+            width: 400px;
+            /* Aumentar el tamaño del sobre */
+            height: 300px;
+            /* Aumentar la altura del sobre */
+            background-color: #e91e63;
+            position: relative;
+            margin-top: 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            overflow: hidden;
+            display: inline-block;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3);
+            /* Sombra debajo del sobre */
+            animation: float 3s ease-in-out infinite;
+            /* Efecto de flotación */
+            transition: all 0.3s ease;
+        }
+        
+        .envelope:hover {
+            box-shadow: 0 35px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        .flap {
+            width: 100%;
+            height: 60%;
+            background-color: #b71c1c;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 30px 30px 0 0;
+            transition: transform 1s ease-in-out;
+        }
+        
+        .card {
+            position: absolute;
+            width: 360px;
+            /* Ajustar el tamaño de la carta */
+            height: 250px;
+            /* Ajustar el tamaño de la carta */
+            background-color: #fff;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            font-size: 18px;
+            color: #333;
+            font-family: 'Kaushan Script', cursive;
+            display: none;
+            animation: fadeIn 1s ease;
+            border: 5px solid #f48fb1;
+        }
+        
+        .envelope.open .card {
+            display: block;
+        }
+        
+        .envelope.open .flap {
+            transform: translateY(-100%);
+        }
+        
+        .text {
+            font-size: 28px;
+            color: #f48fb1;
+            margin-bottom: 20px;
+            animation: slideIn 1.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .border {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 3px solid #f48fb1;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+        
+        .heart {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 35px;
+            height: 35px;
+            background-color: #f48fb1;
+            clip-path: polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%);
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+        
+        .hearts-float {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            animation: floatHearts 4s forwards;
+        }
+        
+        .hearts-float span {
+            display: inline-block;
+            margin: 5px;
+            font-size: 30px;
+            color: #f48fb1;
+            opacity: 0;
+            animation: heartAppear 1s forwards;
+        }
+        
+        .hearts-float span:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .hearts-float span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .hearts-float span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .hearts-float span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        
+        .hearts-float span:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes heartAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes floatHearts {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-100px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>¡Feliz Día de San Valentín!</h1>
+    <div class="container">
+        <div class="envelope" onclick="abrirSobre()">
+            <div class="flap"></div>
+            <div class="card">
+                <div class="text">¡Feliz San Valentín, Amor!</div>
+                <p>Te deseo todo lo mejor en este día tan especial. ¡Que tu día esté lleno de amor y felicidad!</p>
+                <div class="border"></div>
+            </div>
+            <div class="heart"></div>
+            <div class="hearts-float" id="hearts">
+                <span>❤️</span>
+                <span>❤️</span>
+                <span>❤️</span>
+                <span>❤️</span>
+                <span>❤️</span>
+                <span>❤️</span>
+                <span>❤️</span>
+                <span>❤️</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function abrirSobre() {
+            let sobre = document.querySelector('.envelope');
+            let corazones = document.getElementById('hearts');
+            sobre.classList.toggle('open'); // Agrega o quita la clase "open"
+            if (sobre.classList.contains('open')) {
+                // Muestra los corazones flotando
+                corazones.style.display = "block";
+            } else {
+                corazones.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
